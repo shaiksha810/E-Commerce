@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./productSlice.js";
-import Render from "../components/UI/Render.jsx";
-import { useSearch } from "../context/ContextSearch.jsx";
+import Render from "../UI/Render.jsx";
+import { useSearch } from "../../context/ContextSearch.jsx";
 
 const AllProducts = ({ category }) => {
   const dispatch = useDispatch();
