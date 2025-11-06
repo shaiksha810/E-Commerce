@@ -33,9 +33,9 @@ router.get('/auth/user/logout',
 
 //product routes
 router.post('/api/admin/addProducts',
-    upload.single('image'),
     authMiddlware.protect,
     authMiddlware.authorize('admin'),
+    upload.single('image'),
     productController.addProduct
 );
 

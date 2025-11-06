@@ -11,6 +11,15 @@ import Furniture from "./components/categorypages/Furniture";
 import HomeKitchen from "./components/categorypages/HomeKitchen";
 import Fashion from "./components/categorypages/Fashion";
 import ProductDetails from "./pages/ProductDetails";
+import AddProduct from "./admin-pages/AddProduct";
+import AdminLayout from "./components/layout/AdminLayout";
+import Dashboard from "./admin-pages/Dashboard";
+import Products from "./admin-pages/Products";
+import Orders from "./admin-pages/Orders";
+import Users from "./admin-pages/Users";
+import Settings from "./admin-pages/Settings";
+
+
 
 const router = createBrowserRouter([
   {
@@ -62,6 +71,36 @@ const router = createBrowserRouter([
         element: <ProductDetails />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children:[
+      {
+        path:"add-product",
+        element:<AddProduct />
+      },
+      {
+        path:"dashboard",
+        element:<Dashboard />
+      },
+      {
+        path:"products",
+        element:<Products />
+      },
+      {
+        path:"orders",
+        element:<Orders />
+      },
+      {
+        path:"users",
+        element:<Users />
+      },
+      {
+        path:"settings",
+        element:<Settings />
+      },      
+    ]
   },
 ]);
 

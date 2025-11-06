@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = () => {
- 
   const navigation = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -21,10 +21,14 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      console.log(response.data);
-      navigation('/')
-      alert("Login Successful ✅");
-
+      console.log(response.data.role);
+      if (response.data.role == "admin") {
+        alert(`Admin ${response.data.fullName} Login Successful`);
+        navigation("/admin");
+      } else {
+        navigation("/");
+        alert(`User ${response.data.fullName} Login Successful`);
+      }
     } catch (error) {
       console.log(error);
       alert("Something went wrong ❌");

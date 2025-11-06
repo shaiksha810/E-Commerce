@@ -24,6 +24,8 @@ const Register = () => {
       );
 
       console.log(response.data);
+      if(response.data.role == "admin") return <Admin />
+
       navigation('/')
       alert("Registration Successful ✅");
 

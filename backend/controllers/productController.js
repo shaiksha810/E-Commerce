@@ -1,47 +1,51 @@
 import Product from "../models/productModel.js"
 import cloudinary from "../utils/cloudinary.js";
 import Cart from '../models/cartmodel.js'
-import fs from 'fs'
 
 
-
-const addProduct = async (req,res) => {
-    
+const addProduct = async (req, res) => {
   try {
     const { title, description, price, stock, category } = req.body;
-     
-      const result = await cloudinary.uploader.upload(req.file.path, {
-         folder:"ecommerce_products"
-      });
 
+    if (!req.file) {
+      return res.status(400).json({ message: "Please upload a product image" });
+    }
 
-        fs.unlinkSync(req.file.path);
-
+    // ✅ Upload directly from memory buffer
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { folder: "ecommerce_products" },
+      async (error, result) => {
+        if (error) {
+          console.log("Cloudinary upload error:", error);
+          return res.status(500).json({ message: "Image upload failed" });
+        }
 
         const product = await Product.create({
-        title,
-        description,
-        price,
-        stock,
-        category,
-        image: result.secure_url
-     });
+          title,
+          description,
+          price,
+          stock,
+          category,
+          image: result.secure_url,
+        });
 
-     console.log("product created:",product);
-     
-     
-     res.status(200).json({
-        message:"Product Created Successfully",
-        product
-    });
+        console.log("✅ Product Created:", product);
+
+        res.status(201).json({
+          success: true,
+          message: "Product created successfully",
+          product,
+        });
+      }
+    );
+
+    // ✅ Write buffer to Cloudinary
+    uploadStream.end(req.file.buffer);
   } catch (error) {
-    console.log("error creating product:", error);
-    res.status(500).json({ message:"server error" })
+    console.log("❌ Error creating product:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-
-}
-
+};
 
 const getAllProducts = async (req,res) => {
   
