@@ -10,16 +10,18 @@ import authRoutes from './routes/authRoutes.js'
 
 const app = express();
 
+app.use(cookieParser());
+app.use(express.json());
 
-// middlewares
 app.use(
   cors({
-    origin: "https://e-commerce-three-red-76.vercel.app", 
-    credentials: true,        
+    origin: [
+      "http://localhost:5173",
+      "https://e-commerce-three-red-76.vercel.app"
+    ],
+    credentials: true,
   })
 );
-app.use(cookieParser())
-app.use(express.json());
 
 // routes
 app.use('/', authRoutes)
