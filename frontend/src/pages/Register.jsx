@@ -16,28 +16,31 @@ const Register = () => {
     password: "",
     role: "user",
   });
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  try {
+    const response = await axios.post(
+      `${API_URL}/auth/user/register`,
+      formData,
+      { withCredentials: true }
+    );
 
-    try {
-      const response = await axios.post(
-        `${API_URL}/auth/user/register`,
-        formData,
-        { withCredentials: true }
-      );
+    console.log(response.data);
 
-      console.log(response.data);
-      if(response.data.role == "admin") return <Admin />
-
-      navigation('/')
-      alert("Registration Successful ✅");
-
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong ❌");
+    if (response.data.role === "admin") {
+      navigation('/admin');
+      return;
     }
-  };
+
+    navigation('/');
+    alert("Registration Successful ✅");
+
+  } catch (error) {
+    console.log(error);
+    alert(error?.response?.data?.message || "Something went wrong ❌");
+  }
+};
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4">
