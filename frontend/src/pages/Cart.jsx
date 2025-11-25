@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
 const Cart = () => {
+
+
   const [cart, setCart] = useState([]);
 
   const getCartItems = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/mycart", {
+      const res = await axios.get(`${API_URL}/api/mycart`, {
         withCredentials: true,
       });
       setCart(res.data.items);

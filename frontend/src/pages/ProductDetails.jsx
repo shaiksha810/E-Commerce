@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BsCartFill, BsFillCartCheckFill } from "react-icons/bs";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -12,7 +15,7 @@ const ProductDetails = () => {
   const fetchProductsDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/productDetails/${id}`
+        `${API_URL}/api/productDetails/${id}`
       );
       // try common response shapes and set state
       const data =
@@ -45,7 +48,7 @@ const ProductDetails = () => {
 
     try {
     const res = await axios.post(
-      `http://localhost:8000/api/addtocart/${id}`,
+      `${API_URL}/api/addtocart/${id}`,
       {},  // ← empty body
       {
         withCredentials: true, // ← cookie now goes automatically

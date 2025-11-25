@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 const Profile = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,7 +13,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/auth/user/profile", {
+      const res = await axios.get(`${API_URL}/auth/user/profile`, {
         withCredentials: true,
       });
       setData(res.data.profile);
@@ -23,7 +27,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/auth/user/logout", {
+      const res = await axios.get(`${API_URL}/auth/user/logout`, {
         withCredentials: true,
       });
 

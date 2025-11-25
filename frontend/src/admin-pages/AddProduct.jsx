@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Upload, X, Plus, DollarSign, Box } from 'lucide-react';
 import axios from 'axios';
 
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 const AddProduct = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -85,7 +89,7 @@ const AddProduct = () => {
       data.append('image', formData.image);
 
       const response = await axios.post(
-        'http://localhost:8000/api/admin/addProducts',
+        `${API_URL}/api/admin/addProducts`,
         data,
         {
           withCredentials: true,

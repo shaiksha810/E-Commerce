@@ -3,6 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
+
 const Login = () => {
   const navigation = useNavigate();
 
@@ -16,7 +20,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/auth/user/login",
+        `${API_URL}/auth/user/login`,
         formData,
         { withCredentials: true }
       );
