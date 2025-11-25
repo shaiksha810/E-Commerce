@@ -17,6 +17,8 @@ const Profile = () => {
         withCredentials: true,
       });
       setData(res.data.profile);
+      console.log(res.data);
+      
     } catch (error) {
       console.log(error);
       navigate("/user/profile"); 
