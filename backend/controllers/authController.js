@@ -36,7 +36,8 @@ const userRegister = async (req,res) => {
   res.cookie("token", token, {
   httpOnly: true,
   secure: true,
-  sameSite: "none"
+  sameSite: "none",
+   path: "/",
 });
 
 
@@ -82,7 +83,8 @@ const userLogin = async (req,res) => {
   res.cookie("token", token, {
   httpOnly: true,
   secure: true,
-  sameSite: "none"
+  sameSite: "none",
+   path: "/",
 });
 
 
