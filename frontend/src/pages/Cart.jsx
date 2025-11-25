@@ -27,7 +27,7 @@ const Cart = () => {
  const updateQuantity = async (productId, action) => {
   try {
     await axios.put(
-      "http://localhost:8000/api/update-quantity",
+      `${API_URL}/api/update-quantity`,
       { productId, action },
       { withCredentials: true }
     );
