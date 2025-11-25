@@ -14,7 +14,7 @@ const app = express();
 // middlewares
 app.use(
   cors({
-    origin: "e-commerce-three-red-76.vercel.app", 
+    origin: "https://e-commerce-three-red-76.vercel.app", 
     credentials: true,        
   })
 );
