@@ -33,7 +33,12 @@ const userRegister = async (req,res) => {
     { expiresIn:"1d" }
 )
 
-  res.cookie("access_token", token)
+  res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none"
+});
+
 
    res.status(201).json({
     fullName,
@@ -74,10 +79,12 @@ const userLogin = async (req,res) => {
 
 
 
+  res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none"
+});
 
-    res.cookie("access_token", token, {
-      httpOnly: true,
-    });
 
 
     res.status(200).json({
